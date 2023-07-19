@@ -1,1 +1,0 @@
-export const server_url = "https://book-trader.onrender.com"
