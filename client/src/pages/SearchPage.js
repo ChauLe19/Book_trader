@@ -83,7 +83,7 @@ function SearchPage() {
                 <div style={{ backgroundColor: "#192A56", color: "white", textAlign: "center" }}>
                     Available books
                 </div>
-                {forSaleBooks && forSaleBooks.map(elem => <SellerBookBox key={elem.id} book_id={elem.book_id} sellerUsername={elem.owner_username} price={elem.price} dateForSale={elem.date_for_sale} />)}
+                {forSaleBooks ? forSaleBooks.map(elem => <SellerBookBox key={elem.id} book_id={elem.book_id} sellerUsername={elem.owner_username} price={elem.price} dateForSale={elem.date_for_sale} />): <p>There is no one selling this book. Please try again at a different time</p>}
             </div>
         </div>
     );
