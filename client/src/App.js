@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 // import './App.css';
-import './global.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
 import LoginPage from "./pages/LoginPage"
 import Home from "./pages/Home"
 import BookPage from "./pages/BookPage"
