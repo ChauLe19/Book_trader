@@ -160,7 +160,7 @@ app.get('/feed', async (req, res) => {
 })
 
 app.post('/book/:bookId/delete', authenticateUser, async (req, res) => {
-  s.json(await deleteBook(req.userId, req.params.bookId))
+  res.json(await deleteBook(req.userId, req.params.bookId))
 })
 
 // TODO: Delete book
