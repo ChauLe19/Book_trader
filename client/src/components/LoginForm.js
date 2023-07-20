@@ -2,6 +2,7 @@ import React, { Component, useState } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
 import axios from 'axios'
 import { server_url } from "../pages/global_vars";
+import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 
 
 function LoginForm(props) {
@@ -10,6 +11,7 @@ function LoginForm(props) {
     const [password, setPassword] = useState("")
     const [repassword, setRepassword] = useState("")
     const [message, setMessage] = useState("")
+    const [passwordIsShown, setPasswordIsShown] = useState(false)
     const [isLoggedin, setIsLoggedIn] = useState(localStorage.getItem("token"))
     const navigate = useNavigate()
 
@@ -17,70 +19,69 @@ function LoginForm(props) {
         return <Navigate to="/" />
     }
     return (
-        <div>
-            <ul className="login-form">
 
-                <form className="auth-form" >
-                    {!props.isLogin && <li>
-                        <input type="text" name="username" placeholder="Your username" onChange={e => setUsername(e.target.value)} value={username} />
-                    </li>}
-                    <li>
-                        <input type="text" name="email" placeholder="Email" onChange={e => setEmail(e.target.value)} value={email} />
-                    </li>
-                    <li>
-                        <input type="password" name="password" placeholder="**********" onChange={e => setPassword(e.target.value)} className="password-input" value={password} />
-                    </li>
-                    {!props.isLogin && <li>
-                        <input type="password" placeholder="Re-enter password" id="repassword-input" onChange={e => setRepassword(e.target.value)} value={repassword} />
-                    </li>}
-                    <li>
-                        <button type="submit" onClick={
-                            props.isLogin ?
-                                e => {
-                                    e.preventDefault()
-                                    axios.post(`${server_url}/login`, {
-                                        email, password
-                                    }, {
-                                        headers: {
-                                            "Access-Control-Allow-Origin": "*",
-                                            "Content-Type": "application/json"
-                                        }
-                                    }).then(data => {
-                                        console.log(data.data)
-                                        localStorage.setItem("token", data.data.token)
-                                        setIsLoggedIn(true)
-                                        props.handleLogin()
-                                    })
-                                    .catch(err=>setMessage("Error has occured. Please check your email or password."))
+        <div style={{ height: "80%", width: "50vw", minWidth: "300px", maxWidth: "500px", justifyContent: "center", backgroundColor: "white", display: "flex", alignItems: "center", padding: "2rem", borderRadius: "0.5rem" }}>
+            <div className="login-form" style={{ display: "flex", flexDirection: "column", width: "100%", alignItems: "center" }}>
+                <h4>{props.isLogin ? "Sign in" : "Sign up"}</h4>
+                {!props.isLogin &&
+                    <TextField fullWidth id="username" label="Username" placeholder="Your username" onChange={
+                        e => setUsername(e.target.value)} style={{margin: "0.25rem"}} required />
+                }
+                <TextField fullWidth id="email" label="Email" placeholder="Email" onChange={
+                    e => setEmail(e.target.value)} style={{margin: "0.25rem"}} required />
+                <TextField fullWidth id="password" type={passwordIsShown ? "text" : "password"} label="Password" placeholder="Password" onChange={
+                    e => setPassword(e.target.value)} style={{margin: "0.25rem"}} required />
+                {!props.isLogin &&
+                    <TextField fullWidth id="repassword" type="password" label="Confirm Password" placeholder="Confirm password" onChange={
+                        e => setRepassword(e.target.value)} style={{margin: "0.25rem"}} required />
+                }
 
-                                } : e => {
-                                    e.preventDefault()
-                                    if(password!==repassword) throw new Error("Not same password")
-                                    axios.post(`${server_url}/signup`, {
-                                        email, password, username
-                                    },{
-                                        headers: {
-                                            "Access-Control-Allow-Origin": "*",
-                                            "Content-Type": "application/json"
-                                        }
-                                    }).then(data=> navigate("/login"))
+                <FormControlLabel
+                    control={
+                        <Checkbox checked={passwordIsShown} onChange={() => setPasswordIsShown(!passwordIsShown)} name="showPassword" />
+                    }
+                    label="Show Password"
+                />
+                <Button type="submit" variant="contained" style={{ backgroundColor: "#192A56" }} onClick={
+                    props.isLogin ?
+                        e => {
+                            e.preventDefault()
+                            axios.post(`${server_url}/login`, {
+                                email, password
+                            }, {
+                                headers: {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                }
+                            }).then(data => {
+                                console.log(data.data)
+                                localStorage.setItem("token", data.data.token)
+                                setIsLoggedIn(true)
+                                props.handleLogin()
+                            })
+                                .catch(err => setMessage("Error has occured. Please check your email or password."))
 
-                                }}> {props.isLogin ? "Login" : "Register"} </button>
-                    </li>
-                </form>
-                <li className="error">
-                            {message}
-                </li>
-                <li>
-                            <a href={props.isLogin?"/register":"/login"}>{props.isLogin?"Don't have an account?":"Already have an account?"}</a>
-                </li>
-                <li><label for="checkbox">
-                    <input type="checkbox" id="showPasswordCB" />Show
-                    Password</label>
-                </li>
-                <li><a href="#">Forgot password?</a></li>
-            </ul>
-        </div>
+                        } : e => {
+                            e.preventDefault()
+                            if (password !== repassword) throw new Error("Not same password")
+                            axios.post(`${server_url}/signup`, {
+                                email, password, username
+                            }, {
+                                headers: {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                }
+                            }).then(data => navigate("/login"))
+
+                        }}> {props.isLogin ? "Login" : "Register"} </Button>
+                <div className="error">
+                    {message}
+                </div>
+                <div>
+                    <a href={props.isLogin ? "/register" : "/login"}>{props.isLogin ? "Don't have an account?" : "Already have an account?"}</a>
+                </div>
+            </div>
+        </div >
     )
     // }
 }

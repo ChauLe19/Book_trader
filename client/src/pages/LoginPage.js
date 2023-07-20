@@ -15,8 +15,7 @@ function LoginPage({ handleLogin }) {
     let location = useLocation()
     // console.log(props)
     return (
-        <div>
-            <h4>Member {location.pathname}</h4>
+        <div style={{flexGrow: 1, display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#192A56"}}>
             <LoginForm isLogin={location.pathname === "/login"} handleLogin={handleLogin}/>
 
         </div>

@@ -55,8 +55,8 @@ class DBBookBox extends Component {
                                 "Access-Control-Allow-Origin": "*",
                                 "Content-Type": "application/json"
                             }
-                        }).then(() => console.log("sucess"))
-                            .catch(err => console.log(err))
+                        }).then(() => alert(`"${this.props.title}" is added to your bookshelf.`))
+                            .catch(err => err.response.status == 401? alert("Please login to continue.") : alert("Something went wrong"))
                         }> <AddCircleIcon />&nbsp;Add to shelf</Button>
                     </div>
                 </div>

@@ -49,54 +49,8 @@ class BookshelfBox extends Component {
                             }}><Close /> </button>
                             <b style={{ fontSize: "1.2rem" }}>{this.state.title}</b>
                             {this.props.inBookshelf ?
-                                //bookshelf
-                                <Fragment>
-                                    <p>Created: {new Date(this.props.date).toLocaleDateString('en-us', { day: "numeric", year: "numeric", month: "short" })}</p>
-                                    <FormControl>
-                                        <Grid container spacing={1}>
-                                            <Grid item xs={7}>
-                                                <InputLabel>Condition</InputLabel>
-                                                <Select fullWidth
-                                                    className="shelf-book"
-                                                    value={this.state.condition}
-                                                    onChange={(e) => this.setState({ condition: e.target.value })}
-                                                    style={{
-                                                        textAlign: "left"
-                                                    }}
-                                                >
-                                                    <MenuItem value={"New"}>New</MenuItem>
-                                                    <MenuItem value={"Like-new"}>Like-new</MenuItem>
-                                                    <MenuItem value={"Very good"}>Very good</MenuItem>
-                                                    <MenuItem value={"Good"}>Good</MenuItem>
-                                                    <MenuItem value={"Fair"}>Fair</MenuItem>
-                                                    <MenuItem value={"Poor"}>Poor</MenuItem>
-                                                </Select>
-                                            </Grid>
-                                            <Grid item xs={5}>
-                                                <TextField id="price" label="Price"
-                                                    inputProps={{
-                                                        max: 999999.99, min: 0.0,
-                                                        maxLength: 9
-                                                    }}
-                                                    onInput={(e) => {
-                                                        if(isNaN(e.target.value))
-                                                        {
-                                                            e.target.value = e.target.value.slice(0, e.target.value.length - 1)
-                                                        }
-                                                        else if(parseFloat(e.target.value) > 999999.99 )
-                                                        {
-                                                            e.target.value = parseFloat(e.target.value).toString().slice(0,6)
-                                                        }
-                                                    }}
-                                                    onChange={
-                                                        e => this.setState({ price: e.target.value })
-                                                    } required />
-                                            </Grid>
-                                        </Grid>
-                                    </FormControl>
-                                </Fragment>
+                                <p>Created: {new Date(this.props.date).toLocaleDateString('en-us', { day: "numeric", year: "numeric", month: "short" })}</p>
                                 :
-                                // storeshelf
                                 <div>
                                     <div>Price: ${this.props.price}</div>
                                     <div>
@@ -110,6 +64,56 @@ class BookshelfBox extends Component {
                                 </div>
                             }
                             <div style={{ flexGrow: 1 }}></div>
+                            {
+                                this.props.inBookshelf &&
+                                <Fragment>
+                                    <FormControl style={{margin: "0.25rem"}}>
+                                        <Grid container spacing={1}>
+                                            <Grid item xs={7}>
+                                                <FormControl fullWidth>
+                                                    <InputLabel id="condition-label">Condition</InputLabel>
+                                                    <Select fullWidth
+                                                        labelId="condition-label"
+                                                        className="shelf-book"
+                                                        value={this.state.condition}
+                                                        onChange={(e) => this.setState({ condition: e.target.value })}
+                                                        style={{
+                                                            textAlign: "left"
+                                                        }}
+                                                        label="Condition"
+                                                    >
+                                                        <MenuItem value={"New"}>New</MenuItem>
+                                                        <MenuItem value={"Like-new"}>Like-new</MenuItem>
+                                                        <MenuItem value={"Very good"}>Very good</MenuItem>
+                                                        <MenuItem value={"Good"}>Good</MenuItem>
+                                                        <MenuItem value={"Fair"}>Fair</MenuItem>
+                                                        <MenuItem value={"Poor"}>Poor</MenuItem>
+                                                    </Select>
+                                                </FormControl>
+                                            </Grid>
+                                            <Grid item xs={5}>
+                                                <TextField id="price" label="Price"
+                                                    inputProps={{
+                                                        max: 999999.99, min: 0.0,
+                                                        maxLength: 9
+                                                    }}
+                                                    onInput={(e) => {
+                                                        if (isNaN(e.target.value)) {
+                                                            e.target.value = e.target.value.slice(0, e.target.value.length - 1)
+                                                        }
+                                                        else if (parseFloat(e.target.value) > 999999.99) {
+                                                            e.target.value = parseFloat(e.target.value).toString().slice(0, 6)
+                                                        }
+                                                    }}
+                                                    onChange={
+                                                        e => this.setState({ price: e.target.value })
+                                                    } required />
+                                            </Grid>
+                                        </Grid>
+                                    </FormControl>
+                                </Fragment>
+                            }
+
                             <Button variant="contained" color="primary" type="submit" style={{ backgroundColor: "#44bd32", margin: "0.25rem" }} onClick={() => {
                                 axios.post(this.props.inBookshelf ? `${server_url}/book/${this.props.bookId}/sell` : `${server_url}/book/${this.props.bookId}/unsell`, {
                                     price: parseFloat(this.state.price),

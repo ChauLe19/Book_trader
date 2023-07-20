@@ -77,7 +77,7 @@ class FeedBox extends Component {
                     {/* <p>OLID: {this.state.ol_id}</p> */}
                     <span style={{color: "rgb(25, 42, 86)"}}>By {this.state.author}</span>
                 </div>
-                <div style={{color: "gray"}}>
+                <div style={{color: "#192A5691"}}>
                     Condition: {this.props.condition}
                 </div>
                 <div style={{ display: "flex", flexGrow: 2 }}></div>
