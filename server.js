@@ -54,14 +54,14 @@ app.use(express.json())
 function authenticateUser(req, res, next) {
   const Authorization = req.headers.authorization;
   if (Authorization) {
-	const token = Authorization.replace('Bearer ', '')
-	const {userId} = jwt.verify(token, APP_SECRET)
-	req.userId = userId
-	next();
+    const token = Authorization.replace('Bearer ', '')
+    const { userId } = jwt.verify(token, APP_SECRET)
+    req.userId = userId
+    next();
   }
   else {
-	// throw new Error('Not authenticated')
-	res.status(401).json({ error: 'Not authenticated' })
+    // throw new Error('Not authenticated')
+    res.status(401).json({ error: 'Not authenticated' })
   }
 }
 
@@ -76,13 +76,11 @@ app.get('/', (req, res) => {
 app.post('/login', async (req, res) => {
   const email = req.body.email
   const password = req.body.password
-  try
-  {
-	  res.json(await login(email, password))
+  try {
+    res.json(await login(email, password))
   }
-  catch(err)
-  {
-	  res.status(400).send(err)
+  catch (err) {
+    res.status(400).send(err)
   }
 })
 
@@ -120,10 +118,10 @@ app.post('/book/:bookId/unsell', authenticateUser, async (req, res) => {
 
 app.post('/book/:bookId/buy', authenticateUser, async (req, res) => {
   try {
-	res.json(await buyBook(req.userId, req.params.bookId))
+    res.json(await buyBook(req.userId, req.params.bookId))
   }
   catch (err) {
-	res.status(400).send(err.toString())
+    res.status(400).send(err.toString())
   }
 })
 
@@ -135,13 +133,15 @@ app.get('/user/:username', async (req, res) => {
   res.send(await getUserByUsername(req.params.username))
 })
 
-app.get('/forSale/:OL_ID', authenticateUser, async (req, res) => {
-  if (req.userId)
-  {
+app.get('/forSale/:OL_ID', async (req, res) => {
+  const Authorization = req.headers.authorization;
+  if (Authorization) {
+    const token = Authorization.replace('Bearer ', '')
+    const { userId } = jwt.verify(token, APP_SECRET)
+    req.userId = userId
     res.send(await searchForSaleBooksWithOLID(req.userId, req.params.OL_ID));
   }
-  else
-  {
+  else {
     res.send(await searchForSaleBooksWithOLID(null, req.params.OL_ID));
   }
 })
@@ -149,18 +149,18 @@ app.get('/forSale/:OL_ID', authenticateUser, async (req, res) => {
 app.get('/feed', async (req, res) => {
   const Authorization = req.headers.authorization;
   if (Authorization) {
-	const token = Authorization.replace('Bearer ', '')
-	const { userId } = jwt.verify(token, APP_SECRET)
-	req.userId = userId
-	res.send(await feed(req.userId))
+    const token = Authorization.replace('Bearer ', '')
+    const { userId } = jwt.verify(token, APP_SECRET)
+    req.userId = userId
+    res.send(await feed(req.userId))
   }
   else {
-	res.send(await searchForSaleBooks())
+    res.send(await searchForSaleBooks())
   }
 })
 
 app.post('/book/:bookId/delete', authenticateUser, async (req, res) => {
-  res.json(await deleteBook(req.userId, req.params.bookId))
+  s.json(await deleteBook(req.userId, req.params.bookId))
 })
 
 // TODO: Delete book
