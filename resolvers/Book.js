@@ -23,7 +23,8 @@ export async function feed(userId) {
 }
 
 export async function searchForSaleBooksWithOLID(buyer_id, ol_id) {
-    return getQuery(`SELECT books.*, users.username as owner_username from books INNER JOIN users ON books.owned_by = users.user_id WHERE for_sale = 1 AND ol_id = '${ol_id}' AND owned_by <> ${buyer_id} ORDER BY date_for_sale DESC;`)
+    owned_by_req_query = `AND owned_by <> ${buyer_id}`
+    return getQuery(`SELECT books.*, users.username as owner_username from books INNER JOIN users ON books.owned_by = users.user_id WHERE for_sale = 1 AND ol_id = '${ol_id}' ${buyer_id!= null ? owned_by_req_query : "" } ORDER BY date_for_sale DESC;`)
 }
 
 
