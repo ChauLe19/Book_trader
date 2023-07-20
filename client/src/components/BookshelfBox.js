@@ -128,8 +128,6 @@ class BookshelfBox extends Component {
 
                             <Button variant="contained" color="primary" style={{ backgroundColor: "#c23616", margin: "0.25rem" }} onClick={() => {
                                 axios.post(`${server_url}/book/${this.props.bookId}/delete`, {
-                                    price: parseFloat(this.state.price),
-                                    condition: this.state.condition
                                 }, {
                                     headers: {
                                         "Access-Control-Allow-Origin": "*",
