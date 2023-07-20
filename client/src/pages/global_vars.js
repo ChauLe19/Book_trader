@@ -1,1 +1,2 @@
-export const server_url = "https://book-trader.onrender.com"
+import 'dotenv/config'
+export const server_url = process.env.SERVER_URL
