@@ -142,7 +142,7 @@ app.get('/forSale/:OL_ID', authenticateUser, async (req, res) => {
   }
   else
   {
-    res.status(401).send("Not authenticated")
+    res.send(await searchForSaleBooksWithOLID(null, req.params.OL_ID));
   }
 })
 
