@@ -37,22 +37,26 @@ function SellPage(props) {
 
                         <Grid container spacing={1}>
                             <Grid item xs={6}>
-                                <InputLabel>Condition</InputLabel>
-                                <Select fullWidth
-                                    className="shelf-book"
-                                    value={condition}
-                                    onChange={(e) => setCondition(e.target.value)}
-                                    style={{
-                                        textAlign: "left"
-                                    }}
-                                >
-                                    <MenuItem value={"New"}>New</MenuItem>
-                                    <MenuItem value={"Like-new"}>Like-new</MenuItem>
-                                    <MenuItem value={"Very good"}>Very good</MenuItem>
-                                    <MenuItem value={"Good"}>Good</MenuItem>
-                                    <MenuItem value={"Fair"}>Fair</MenuItem>
-                                    <MenuItem value={"Poor"}>Poor</MenuItem>
-                                </Select>
+                                <FormControl fullWidth>
+                                    <InputLabel id="condition-label">Condition</InputLabel>
+                                    <Select fullWidth
+                                        labelId="condition-label"
+                                        className="shelf-book"
+                                        value={condition}
+                                        onChange={(e) => setCondition(e.target.value)}
+                                        style={{
+                                            textAlign: "left"
+                                        }}
+                                        label="Condition"
+                                    >
+                                        <MenuItem value={"New"}>New</MenuItem>
+                                        <MenuItem value={"Like-new"}>Like-new</MenuItem>
+                                        <MenuItem value={"Very good"}>Very good</MenuItem>
+                                        <MenuItem value={"Good"}>Good</MenuItem>
+                                        <MenuItem value={"Fair"}>Fair</MenuItem>
+                                        <MenuItem value={"Poor"}>Poor</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
                             <Grid item xs={6}>
 
