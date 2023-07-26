@@ -20,8 +20,8 @@ function LoginForm(props) {
     }
     return (
 
-        <div style={{ height: "80%", minHeight: props.isLogin ? "" : 430, width: "50vw", minWidth: "300px", maxWidth: "500px", justifyContent: "center", backgroundColor: "white", display: "flex", alignItems: "center", padding: "2rem", borderRadius: "0.5rem" }}>
-            <div className="login-form" style={{ display: "flex", flexDirection: "column", width: "100%", alignItems: "center" }}>
+        <div className="login-container" style={{ minHeight: props.isLogin ? "" : 430}}>
+            <div className="login-form">
                 <h4>{props.isLogin ? "Sign in" : "Sign up"}</h4>
                 {!props.isLogin &&
                     <TextField fullWidth id="username" label="Username" placeholder="Your username" onChange={
@@ -83,10 +83,6 @@ function LoginForm(props) {
             </div>
         </div >
     )
-    // }
 }
-
-// function handleLogin() { }
-// function handleRegister() { }
 
 export default LoginForm

@@ -14,25 +14,20 @@ function SellPage(props) {
     const [condition, setCondition] = useState("New")
     // if (reload) return (<Redirect to="/user/sell" />)
     return (
-        <div style={{ minWidth: "50vw", minHeight: "80vh", textAlign: "center", borderColor: "#273c75", borderStyle: "solid", borderRadius: "1rem", borderWidth: "0.5rem", backgroundColor: "white", color: "#273c75", position: "relative", display: "flex", justifyContent: "center" }}>
-            <button style={{ position: "absolute", top: 0, right: 0, aspectRatio: 1, backgroundColor: "transparent", borderWidth: 0 }} onClick={() => props.close()}><CloseRounded /></button>
+        <div className="sell-page-modal">
+            <button className="close-button" onClick={() => props.close()}><CloseRounded /></button>
 
-            <form style={{ padding: "2rem", justifyContent: "center", display: "flex", flexDirection: "column", textAlign: "center", width: "100%" }}>
+            <form className="sell-form">
                 <div style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
                     {props.title}
                 </div>
                 <div>
                     By {props.author}
                 </div>
-                <div style={{
+                <div className="book-image" style={{
                     backgroundImage: `url(${props.imgHref})`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "contain",
-                    backgroundPosition: "center",
-                    height: "200px"
                 }}></div>
                 <div style={{ margin: "1rem" }}>
-                    {/* <label for="price">Price:</label> */}
                     <FormControl style={{ width: "50%" }}>
 
                         <Grid container spacing={1}>

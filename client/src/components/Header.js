@@ -13,7 +13,7 @@ class Header extends Component {
     render() {
         return (
             <div className="header row">
-                <div className='col-3' style={{ width: "max-content", display: "flex", flexDirection: "row", alignItems: "baseline", justifyContent: "center" }}>
+                <div className='col-3' style={{ width: "max-content", display: "flex", flexDirection: "row", alignItems: "baseline", justifyContent: "left" }}>
                     <div>
                         <Logo height="100px" width="100px" color="#273c75" />
                     </div>
@@ -25,7 +25,7 @@ class Header extends Component {
 
                     <SearchBar />
                 </div>
-                <ul className="inline-list col-3" style={{ display: "flex", justifyContent: "center" }}>
+                <ul className="inline-list col-3" style={{ display: "flex", justifyContent: "right" }}>
                     <li>
                         <Link to="/">Home</Link>
                     </li>

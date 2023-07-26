@@ -22,44 +22,6 @@ function ShelfPage({ inBookshelf }) {
     }, [])
 
     return (
-        // <div className="row">
-        //     {data[whichShelf].isNotEmpty && (
-        //         <button
-        //             onClick={() => {
-
-        //                 fetchMore({
-        //                     variables: {
-        //                         cursorId: data[whichShelf].cursorId,
-        //                     },
-        //                     updateQuery: (prev, { fetchMoreResult, ...rest }) => {
-        //                         if (!fetchMoreResult) return prev;
-        //                         // console.log(fetchMoreResult)
-        //                         const data = {
-        //                             ...fetchMoreResult,
-        //                         };
-        //                         data[whichShelf] = {
-        //                             ...(fetchMoreResult.myBookShelf || fetchMoreResult.myStoreShelf),
-        //                             results: [
-        //                                 ...(prev.myBookShelf || prev.myStoreShelf).results,
-        //                                 ...(fetchMoreResult.myBookShelf || fetchMoreResult.myStoreShelf).results,
-        //                             ],
-        //                         }
-
-        //                         return data
-        //                     },
-        //                 })
-        //             }
-        //             }
-        //         >
-        //             Load More
-        //         </button>
-        //     ) || (
-        //             <p>This is the end</p>
-        //         )
-        //     }
-        // </div>
-
-        // <div className="row">
         <div className="row" style={{ margin: "auto", width: "90%" }}>
             {
                 shelf.length > 0 ? shelf.map(book =>

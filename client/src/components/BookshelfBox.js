@@ -35,16 +35,12 @@ class BookshelfBox extends Component {
     render() {
         if (this.state.reload) return (<Navigate to={this.props.inBookshelf ? "/my/book-shelf" : "/my/store-shelf"} />)
         return (
-            <div className="col-3 horizontal-center" style={{}}>
+            <div className="col-3 horizontal-center">
                 <div style={{ margin: "5px", padding: "2rem" }} >
 
-                    <div className={`book${this.state.active ? " active" : ""}`} style={{
-                        width: "max-content",
-                        height: "max-content",
-                        margin: "auto"
-                    }}>
-                        <div className="overlay" style={{ position: "absolute", top: 0, bottom: 0, right: 0, left: 0, flexDirection: "column", justifyContent: "center", padding: "1rem", color: "#192a56" }}>
-                            <button style={{ position: "absolute", right: 0, top: 0, width: "25px", height: "25px", display: "flex", justifyContent: "center", backgroundColor: "transparent", borderWidth: 0 }} onClick={() => {
+                    <div className={`book${this.state.active ? " active" : ""}`}>
+                        <div className="overlay">
+                            <button className="close-button" onClick={() => {
                                 this.setState({ active: false })
                             }}><Close /> </button>
                             <b style={{ fontSize: "1.2rem" }}>{this.state.title}</b>
@@ -67,7 +63,7 @@ class BookshelfBox extends Component {
                             {
                                 this.props.inBookshelf &&
                                 <Fragment>
-                                    <FormControl style={{margin: "0.25rem"}}>
+                                    <FormControl style={{ margin: "0.25rem" }}>
                                         <Grid container spacing={1}>
                                             <Grid item xs={7}>
                                                 <FormControl fullWidth>
@@ -114,7 +110,7 @@ class BookshelfBox extends Component {
                                 </Fragment>
                             }
 
-                            <Button variant="contained" color="primary" type="submit" style={{ backgroundColor: "#44bd32", margin: "0.25rem" }} onClick={() => {
+                            <Button className="sell-button" variant="contained" type="submit" style={{ margin: "0.25rem" }} onClick={() => {
                                 axios.post(this.props.inBookshelf ? `${server_url}/book/${this.props.bookId}/sell` : `${server_url}/book/${this.props.bookId}/unsell`, {
                                     price: parseFloat(this.state.price),
                                     condition: this.state.condition
@@ -126,7 +122,7 @@ class BookshelfBox extends Component {
                                 }).then(data => this.setState({ reload: true }))
                             }}><MonetizationOn />&nbsp;{this.props.inBookshelf ? "Sell" : "Unsell"}</Button>
 
-                            <Button variant="contained" color="primary" style={{ backgroundColor: "#c23616", margin: "0.25rem" }} onClick={() => {
+                            <Button className="delete-button" variant="contained" style={{ backgroundColor: "#c23616", margin: "0.25rem" }} onClick={() => {
                                 axios.post(`${server_url}/book/${this.props.bookId}/delete`, {
                                 }, {
                                     headers: {
@@ -140,7 +136,7 @@ class BookshelfBox extends Component {
                             console.log("trigger")
                             this.setState({ active: true })
                         }}></div>
-                        <img src={this.state.imgHref} style={{ height: "350px", boxShadow: "30px 30px 30px rgb(0 0 0 / 0.4)" }} />
+                        <img src={this.state.imgHref} style={{}} />
                     </div>
                 </div>
             </div>

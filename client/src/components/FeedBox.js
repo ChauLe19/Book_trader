@@ -59,34 +59,28 @@ class FeedBox extends Component {
     render() {
         if (this.state.reloadFeed) return (<Navigate to="/my/book-shelf" />)
         return (
-            <div className="col" style={{ display: "flex", flexDirection: "column", borderRadius: "0.5rem", backgroundColor: "white", padding: "1rem", color: "white", paddingLeft: "2rem", paddingRight: "2rem" }}>
-                <p style={{ display: "flex", justifyContent: "space-between", color: "gray" }}><div><AccountCircleIcon /> {this.props.sellerUsername} </div>{this.getDatePosted(new Date(this.props.dateForSale))}</p>
-                <div style={{
+            <div className="col feed-box">
+                <p className="posting-info">
+                    <div><AccountCircleIcon /> {this.props.sellerUsername} </div>{this.getDatePosted(new Date(this.props.dateForSale))}
+                </p>
+                <div className="book-image" style={{
                     backgroundImage: `url(${this.state.imgHref})`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "contain",
-                    backgroundPosition: "center",
-                    width: "100%",
-                    aspectRatio: "auto",
-                    height: "200px",
-                    maxHeight: "250px"
                 }} >
                 </div>
                 <div>
-                    <b style={{fontSize: "1.2rem", color: "rgb(25, 42, 86)"}}>{this.state.title}<br /> {this.state.subtitle}</b>
-                    {/* <p>OLID: {this.state.ol_id}</p> */}
-                    <span style={{color: "rgb(25, 42, 86)"}}>By {this.state.author}</span>
+                    <b style={{ fontSize: "1.2rem", color: "rgb(25, 42, 86)" }}>{this.state.title}<br /> {this.state.subtitle}</b>
+                    <span style={{ color: "rgb(25, 42, 86)" }}>By {this.state.author}</span>
                 </div>
-                <div style={{color: "#192A5691"}}>
+                <div style={{ color: "#192A5691" }}>
                     Condition: {this.props.condition}
                 </div>
-                <div style={{ display: "flex", flexGrow: 2 }}></div>
-                <div style={{ color: "black", fontSize: "1.5rem", textAlign: "center" }}>
+                <div className="spacer"></div>
+                <div className="price" style={{}}>
                     ${this.props.price}
                 </div>
-                <div style={{display: "flex", justifyContent: "center"}}>
-                
-                    <Button variant="contained" color="secondary" style={{ backgroundColor: "#e84118", width: "max-content", marginTop: "0.5rem" }} onClick={() => {
+                <div style={{ display: "flex", justifyContent: "center" }}>
+
+                    <Button className="buy-button" variant="contained" color="secondary" onClick={() => {
                         this.props.buyBook(this.props.bookId).then((data) => {
                             console.log(data);
                             this.setState({

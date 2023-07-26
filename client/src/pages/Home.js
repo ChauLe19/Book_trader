@@ -24,9 +24,9 @@ function Home() {
 
     return (
 
-        <div style={{backgroundColor: "rgb(25, 42, 86)", flexGrow: 2}}>
+        <div className="full-page" style={{backgroundColor: "#273c75"}}>
 
-            <div style={{ width: "90%", margin: "auto", display: "grid", gap: "1rem", boxSizing: "border-box", padding: "1rem", gridTemplateColumns: "repeat(4,1fr)" }}>
+            <div className="feed">
 
                 {/* <InfiniteScroll
                 loadMore={handleLoadMore}

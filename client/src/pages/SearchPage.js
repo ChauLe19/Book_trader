@@ -39,11 +39,6 @@ function SearchPage() {
             }
             loadBooks()
         }
-        // fetchBookById(OL_ID).then(book => {
-        //     book.cover_i = book.covers.length > 0 ?`http://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg` :  "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg";
-
-        //     setBookInfo(book)
-        // })
     }, [currentOLID])
 
     return (
@@ -73,13 +68,6 @@ function SearchPage() {
                 })}
             </div>
             <div id="sellers" style={{ height: "100%", overflow: "scroll", border: "0.5rem solid #192A56", borderWidth: "0.25rem" }}>
-                {/* {(!forSaleBooks || forSaleBooks.length === 0) && (
-                        <Fragment>
-
-                            <p>There is no one selling this book. Try with another edition of this book or try again at a different time.</p>
-                        </Fragment>
-                    )
-                    } */}
                 <div style={{ backgroundColor: "#192A56", color: "white", textAlign: "center" }}>
                     Available books
                 </div>
