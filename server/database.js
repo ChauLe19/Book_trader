@@ -1,15 +1,17 @@
+import 'dotenv/config'
 import mysql from 'mysql2'
+
 export const pool = mysql.createPool({
-    host: 'sql9.freemysqlhosting.net',
-    user: 'sql9633777',
-    password: 'bMEAnTXpkL',
-    database: 'sql9633777',
-    port: 3306
+    host: process.env.DATABASE_URL,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DBNAME,
+    port: process.env.DB_PORT
 }).promise()
 
 export async function getQuery(query) {
     const [res, schema] = await pool.query(query)
-    return res;
+    return res;A
 }
 
 export async function getQueryOneOrNull(query) {

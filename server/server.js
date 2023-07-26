@@ -170,5 +170,5 @@ app.post('/book/:bookId/delete', authenticateUser, async (req, res) => {
 app.use(errorHandler)
 
 app.listen({ port: process.env.PORT || 4000 }, () => {
-  console.log(`🚀 Server ready at port ${process.env.serverPORT || 4000}`);
+  console.log(`🚀 Server ready at port ${process.env.PORT || 4000}`);
 })
